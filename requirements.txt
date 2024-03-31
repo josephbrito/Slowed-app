@@ -1,0 +1,10 @@
+AudioFusion==0.1.5
+cffi==1.16.0
+numpy==1.26.4
+pedalboard==0.9.3
+pycparser==2.22
+pydub==0.25.1
+pyrubberband==0.3.0
+PySoundFile==0.9.0.post1
+six==1.16.0
+soundfile==0.12.1

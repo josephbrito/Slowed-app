@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+output/*
+lib/*
+bin/*
+*.mp3
+*.wav
