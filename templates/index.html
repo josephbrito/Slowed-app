@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/logo.png') }}" type="image/png" />
+    <title>Slowed App</title>
+</head>
+<body>
+    <div id="loading-screen" class="loading" style="display: none;">
+        <span class="loader"></span>
+    </div>
+    <header class="header">
+        <div class="logo-container">
+            <a href="/">
+                <img class="logo" src="{{url_for('static', filename='assets/logo.png')}}" alt="Logo do Slowed App" />
+            </a>
+        </div>
+
+        <nav class="navbar">
+            <a class="nav-item" href="/" style="border-bottom: 2px solid #fff;">Início</a>
+            <a class="nav-item" href="/about">Sobre</a>
+        </nav>
+    </header>
+    <form class="main" id="form-main" method="POST" action="/load" enctype="multipart/form-data">
+        <div class="main-content">
+            <h1 class="title">Slowed app</h1>
+
+            <input type="url" name="yt_url" id="yt_url" class="inp-url" placeholder="URL FROM YOUTUBE" />
+            <div class="button-container">
+                <input type="file" style="display: none;" id="file" name="file_song" accept=".mp3,.wav,.ogg" />
+                <label for="file" class="button">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    Carregar Arquivo
+                </label>
+                <button type="btn-submit" class="button" id="btn-submit">Converter</button>
+            </div>
+            <audio id="my-audio" class="inp-audio" controls style="display: none;"></audio>
+            <p id="result"></p>
+        </div>
+    </form>
+
+    <footer class="footer">
+        <p>&copy; Slowed App - <span id="year"></span></p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5f166de9b4.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename="js/script.js") }}"></script>
+</body>
+</html>
