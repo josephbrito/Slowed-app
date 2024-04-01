@@ -3,7 +3,6 @@ import soundfile as sf
 import subprocess
 import time
 import shutil
-import sys
 
 import pyrubberband as prband
 
@@ -15,21 +14,26 @@ from pedalboard import Reverb
 from pedalboard import Convolution
 from pedalboard import PitchShift
 
-def main():
+def main(path):
     try:
-        if (len(sys.argv) < 2):
-            printUsage()
-            sys.exit()
+        #allowed formats
+        ext_allowed = ['.mp3', '.wav']
 
         # tsp = timestamp
         tsp = str(time.time()).split('.')[0]
 
-        path_song = sys.argv[1]
+        path_song = path
 
         song_name = path_song.split('.')[-2]
         song_name = song_name.split('/')[-1] + "-" + tsp
 
         file_type = "." + path_song.split('.')[-1]
+
+        exists = file_type in ext_allowed
+
+        if not exists:
+            print("Format not allowed. Aborting system!")
+            return None
 
         slow_or_fast = '-slowed'
 
@@ -92,12 +96,13 @@ def main():
 
         os.remove(song_path)
         os.remove(destination + song_name+slow_or_fast+".wav")
+        os.remove(path)
 
         print("\nFinished!")
 
+        return destination + song_name+slow_or_fast+".mp3"
     except Exception as e:
         print('An error occured: \n', e)
-        sys.exit()
     
 
 def print_progress(step, total):
