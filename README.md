@@ -1,13 +1,3 @@
-## Song Effects Python
+# Welcome to Slowed App
 
-### Create a virtual enviromento with:
-```bash
-virtualenv --python=python3 name_directory
-```
-
-#### Then:
-
-```bash
-pip install -r requirements.txt
-```
-## Soon with flask
+### Make your songs Slowed + Reverb easily
