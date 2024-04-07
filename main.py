@@ -5,9 +5,7 @@ import time
 import shutil
 
 import pyrubberband as prband
-
 from pydub import AudioSegment
-
 from AudioFusion import Fusion
 from pedalboard import Pedalboard
 from pedalboard import Reverb
@@ -24,99 +22,85 @@ def main(path):
 
         path_song = path
 
-        song_name = path_song.split('.')[-2]
-        song_name = song_name.split('/')[-1] + "-" + tsp
+        song_name = os.path.basename(path_song).split('.')[0] + "-" + tsp
 
-        file_type = "." + path_song.split('.')[-1]
+        file_type = os.path.splitext(path_song)[1]
 
-        exists = file_type in ext_allowed
-
-        if not exists:
-            print("Format not allowed. Aborting system!")
+        if file_type not in ext_allowed:
+            print("Formato não permitido. Abortando sistema!")
             return None
 
         slow_or_fast = '-slowed'
 
-        # Default output
+        # output folder
         destination = 'output/'
 
-        # Song to wav file if file_type == '.mp3'
-        if (file_type == ".mp3"):
-            dst = destination + song_name + '.wav'
-            subprocess.call(['ffmpeg', '-i', path_song, dst ])
-            file_type = ".wav"
-            song_path = destination + song_name.replace('/', '') + file_type
-        elif (file_type == ".wav"):
-            shutil.copy(path_song, destination + song_name.replace('/', '') + file_type)
-            song_path = destination + song_name.replace('/', '') + file_type
+        # file .mp3 to .wav
+        if file_type == ".mp3":
+            dst = os.path.join(destination, song_name + '.wav')
+            subprocess.call(['ffmpeg', '-i', path_song, dst])
+            song_path = dst
+        else:
+            shutil.copy(path_song, os.path.join(destination, song_name + file_type))
+            song_path = os.path.join(destination, song_name + file_type)
 
         song = Fusion.loadSound(song_path)
         song = Fusion.effectSlowed(song, speedMultiplier=0.80)
-
-        Fusion.saveSound(song, destination + song_name.replace('/', ''))
+        Fusion.saveSound(song, os.path.join(destination, song_name))
 
         reverb = Pedalboard([
             Convolution(song_path, 0.10),
             Reverb(room_size=0.30, wet_level=.40, dry_level=.40),
         ])
 
-        total_steps = 5  # Número total de etapas
+        total_steps = 5  # number of steps
 
-        print("Loading...")
+        print("Carregando...")
 
-        # Step 1: Load and process audio
+        # Step 1: load the song file
         print_progress(1, total_steps)
 
         audio, sample_rate = sf.read(song_path)
         tempo_shift = prband.time_stretch(audio, sample_rate, 100/100.0)
-        sf.write(destination + song_name+slow_or_fast+".wav", tempo_shift, sample_rate, format="wav")
+        sf.write(os.path.join(destination, song_name + slow_or_fast + ".wav"), tempo_shift, sample_rate, format="wav")
 
-        # Step 2: Shift de pitch
+        # Step 2: change pitch
         print_progress(2, total_steps)
 
         audio_2, sample_rate_2 = sf.read(song_path)
         pitch_shift = prband.pitch_shift(audio_2, sample_rate_2, 100/100.0)
-        sf.write(destination + song_name+slow_or_fast+".wav", pitch_shift, sample_rate_2, format="wav")
+        sf.write(os.path.join(destination, song_name + slow_or_fast + ".wav"), pitch_shift, sample_rate_2, format="wav")
 
-        # Step 3: pedalboard effects
+        # Step 3: Set effects pedalboard
         print_progress(3, total_steps)
 
         audio_3, sample_rate_3 = sf.read(song_path)
         all_effects = reverb(audio_3, sample_rate_3)
         sf.write(song_path, all_effects, sample_rate_3)
 
-        # Step 4: to mp3 file
+        # Step 4: File to .mp3
         print_progress(4, total_steps)
 
         final_wav = AudioSegment.from_wav(song_path)
-        final_wav.export(destination + song_name+slow_or_fast+".mp3")
+        final_wav.export(os.path.join(destination, song_name + slow_or_fast + ".mp3"), format="mp3")
 
-        # Step 5: clear temp files
+        # Step 5: Clear temp files
         print_progress(5, total_steps)
 
         os.remove(song_path)
-        os.remove(destination + song_name + slow_or_fast + ".wav")
-        os.remove(path)
+        os.remove(os.path.join(destination, song_name + slow_or_fast + ".wav"))
+        os.remove(os.path.join(path))
 
-        print("\nFinished!")
+        print("\nConcluído!")
 
-        return destination + song_name + slow_or_fast + ".mp3"
+        return os.path.join(destination, song_name + slow_or_fast + ".mp3")
     except Exception as e:
-        print('An error occured: \n', e)
-    
+        print('Ocorreu um erro: \n', e)
 
 def print_progress(step, total):
     percentage = (step / total) * 100
     progress_bar = '[' + '=' * int(percentage / 10) + ' ' * (10 - int(percentage / 10)) + ']'
-    print(f"\rProgress: {percentage:.2f}% {progress_bar}", end='', flush=True)
-
-
-def printUsage():
-    print("""Usage: python main.py [input_song_path] [output_song_path]
-
-#Options:
-the output slowed reverb file is optional [default is in output folder]
-""")
+    print(f"\rProgresso: {percentage:.2f}% {progress_bar}", end='', flush=True)
 
 if __name__ == '__main__':
     main()

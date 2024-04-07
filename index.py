@@ -24,6 +24,7 @@ def loadsong():
             return send_file(song_path_slowed, as_attachment=True, mimetype='audio/mpeg')
         else:
             abort(500)
+    return abort(400)
 
 @app.route('/load/youtube', methods=['POST'])
 def loadUrl():
@@ -42,4 +43,4 @@ def loadUrl():
         abort(500)
 
 if __name__ == '__main__':
-   app.run()
+   app.run(debug=True)
