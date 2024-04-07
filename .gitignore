@@ -1,7 +1,8 @@
 # created by virtualenv automatically
 __pycache__
 output/*
-lib/*
-bin/*
+__pycache__
+lib
+bin
 *.mp3
 *.wav

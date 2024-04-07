@@ -1,0 +1,320 @@
+/* ---------- Begin default styles ----------- */
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family:sans-serif;
+    background: url('../assets/bg.png') no-repeat;
+    background-color: rgba(0, 0, 0, .3);
+    background-blend-mode: color;
+    background-position: center;
+    background-size: cover;
+}
+/* ---------- End default styles ----------- */
+
+/* ---------- Begin header styles ------------- */
+.header {
+    height:15vh;
+    display: flex;
+    justify-content: center;
+    gap:3rem;
+    align-items: center;
+}
+
+.logo-container {
+    width:100px;
+}
+
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.navbar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap:3rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    color:#fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding:5px 0;
+}
+/* ------------ End header styles ---------------- */
+
+/* ------------- Begin main styles ------------ */
+.main {
+    height: calc(100vh - 20vh);
+    width:85%;
+    margin:auto;
+    margin-top:3rem;
+}
+
+.main-content {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:2.5rem;
+    margin:0 auto;
+}
+
+.title  {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color:#fff;
+}
+
+.inp-url {
+    background:#333;
+    padding:10px 25px;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    height:50px;
+    border: none;
+    outline: none;
+    width:  50%;
+    border-radius: 30px;
+    color: #fff;
+    transition: .3s ease-out;
+}
+
+.inp-audio {
+    width:35%;
+    height: 50px;
+}
+
+.button-container {
+    display:flex;
+    gap:1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button {
+    background-color: #fff;
+    padding:20px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    transition: .3s ease-out;
+    border:1px solid #fff;
+    text-decoration: none;
+}
+
+#result {
+    color:#fff;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+/* --------- End main styles ---------- */
+
+
+/* ---------- Begin footer styles ---------- */
+.footer {
+    background: #000;
+    padding:20px;
+    text-align: center;
+    color:#fff;
+}
+/* ---------- End footer styles ---------- */
+
+/* --------- Begin user interactions styles ------------- */
+
+.button:hover {
+    border:1px solid #000;
+}
+
+.inp-url:focus {
+    box-shadow: 1px 1px 5px  #000;
+}
+
+/* --------- End user interactions styles ------------- */
+
+/* ---------- Begin Additional styles ---------- */
+
+.loading {
+    position:absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    color: #FFF;
+    position: relative;
+    font-size: 11px;
+    background: #FFF;
+    animation: escaleY 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+    animation-delay: -0.16s;
+  }
+  .loader:before,
+  .loader:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2em;
+    background: #FFF;
+    width: 1em;
+    height: 4em;
+    animation: escaleY 1s infinite ease-in-out;
+  }
+  .loader:before {
+    left: -2em;
+    animation-delay: -0.32s;
+  }
+
+  .icon {
+    color:#fff;
+    font-size: 2rem;
+    transition: .2s ease-out;
+  }
+
+  .icon:hover {
+    transform: scale(1.1);
+  }
+
+  .error {
+    position: absolute;
+    background:rgba(255, 57, 57, .85);
+    color:white;
+    padding:20px 30px;
+    display: flex;
+    gap:1.2rem;
+    flex-direction: column;
+    text-align: center;
+    right:0;
+    animation: errorY 3s infinite ease-out;
+    margin:30px;
+  }
+  
+  @keyframes escaleY {
+    0%, 80%, 100% {
+      box-shadow: 0 0;
+      height: 4em;
+    }
+    40% {
+      box-shadow: 0 -2em;
+      height: 5em;
+    }
+  }
+
+  @keyframes errorY {
+    40% {
+        margin-top: 90px;
+    }
+
+    60% {
+        margin-top: 70px;
+    }
+
+    80% {
+        margin-top: 50px;
+    }
+
+    90% {
+        margin-top:30px;
+    }
+
+    100% {
+        margin-top:20px;
+    }
+  }
+
+/* ---------- End Additional styles ---------- */
+
+/* --------- Begin About page styles ------------ */
+.card-container {
+    display: flex;
+    align-items: center;
+    padding:40px 30px;
+    /* background-color: rgba(0, 0, 0, .5); */
+    width: 100%;
+    justify-content: center;
+    gap:2rem;
+    margin-bottom: 50px;
+    transition: .2s ease-out;
+}
+
+.card-container:hover {
+    background-color: rgba(0,0,0,.2);
+}
+
+.photo-container {
+    width:250px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.photo {
+    max-width:100%;
+    max-height:100%;
+    border-radius: 50%;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-header {
+    text-align: center;
+    color:#fff;
+}
+
+.info-body {
+    color:#fff;
+    text-align: center;
+}
+
+.info-footer {
+    display: flex;
+    gap:2rem;
+}
+
+.card-container:nth-child(2) {
+    flex-direction: row-reverse;
+}
+/* --------- End About page styles ------------ */
+@media(max-width:970px) {
+   .inp-url {
+       width:100%;
+   }       
+}
+
+@media(max-width:565px) {
+    .main {
+        width: 100%;
+    }
+}
