@@ -95,12 +95,12 @@ def main(path):
         print_progress(5, total_steps)
 
         os.remove(song_path)
-        os.remove(destination + song_name+slow_or_fast+".wav")
+        os.remove(destination + song_name + slow_or_fast + ".wav")
         os.remove(path)
 
         print("\nFinished!")
 
-        return destination + song_name+slow_or_fast+".mp3"
+        return destination + song_name + slow_or_fast + ".mp3"
     except Exception as e:
         print('An error occured: \n', e)
     
