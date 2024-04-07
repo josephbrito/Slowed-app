@@ -99,9 +99,14 @@ $('#btn-submit').on('click', function(e) {
                 Download
                 `;
     
+                if(document.getElementById('btn-download')) {
+                    $('#btn-download').remove();
+                }
+
                 let a = document.createElement('a');
             
                 a.classList.add('button')
+                a.id = 'btn-download'
                 a.insertAdjacentHTML('beforeend', a_html);
                 a.href = url;
                 a.download = download_name;
