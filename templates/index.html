@@ -8,9 +8,19 @@
     <title>Slowed App</title>
 </head>
 <body>
+    <!-- Loading and error -->
     <div id="loading-screen" class="loading" style="display: none;">
         <span class="loader"></span>
     </div>
+
+    <div id="error-screen" class="error" style="display:none;">
+        <h4 class="error-title">
+            <i class="fa-solid fa-xmark"></i>
+            Erro
+        </h4>
+        <span class="error-msg">Tipo de arquivo não suportado</span>
+    </div>
+    <!-- End loading and error -->
     <header class="header">
         <div class="logo-container">
             <a href="/">
@@ -27,7 +37,7 @@
         <div class="main-content">
             <h1 class="title">Slowed app</h1>
 
-            <input type="url" name="yt_url" id="yt_url" class="inp-url" placeholder="URL FROM YOUTUBE" />
+            <input type="url" name="yt_url" id="yt_url" class="inp-url" placeholder="YOUTUBE URL" />
             <div class="button-container">
                 <input type="file" style="display: none;" id="file" name="file_song" accept=".mp3,.wav,.ogg" />
                 <label for="file" class="button">
@@ -36,8 +46,7 @@
                 </label>
                 <button type="btn-submit" class="button" id="btn-submit">Converter</button>
             </div>
-            <audio id="my-audio" class="inp-audio" controls style="display: none;"></audio>
-            <p id="result"></p>
+            <p id="result" style="display: none;"></p>
         </div>
     </form>
 
