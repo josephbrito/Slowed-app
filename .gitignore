@@ -6,3 +6,4 @@ lib
 bin
 *.mp3
 *.wav
+.vercel
