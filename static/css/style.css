@@ -119,6 +119,7 @@ body, html {
     gap:1rem;
     transition: .3s ease-out;
     border:1px solid #fff;
+    text-decoration: none;
 }
 
 #result {
@@ -197,6 +198,20 @@ body, html {
   .icon:hover {
     transform: scale(1.1);
   }
+
+  .error {
+    position: absolute;
+    background:rgba(255, 57, 57, .85);
+    color:white;
+    padding:20px 30px;
+    display: flex;
+    gap:1.2rem;
+    flex-direction: column;
+    text-align: center;
+    right:0;
+    animation: errorY 3s infinite ease-out;
+    margin:30px;
+  }
   
   @keyframes escaleY {
     0%, 80%, 100% {
@@ -206,6 +221,28 @@ body, html {
     40% {
       box-shadow: 0 -2em;
       height: 5em;
+    }
+  }
+
+  @keyframes errorY {
+    40% {
+        margin-top: 90px;
+    }
+
+    60% {
+        margin-top: 70px;
+    }
+
+    80% {
+        margin-top: 50px;
+    }
+
+    90% {
+        margin-top:30px;
+    }
+
+    100% {
+        margin-top:20px;
     }
   }
 
@@ -221,6 +258,11 @@ body, html {
     justify-content: center;
     gap:2rem;
     margin-bottom: 50px;
+    transition: .2s ease-out;
+}
+
+.card-container:hover {
+    background-color: rgba(0,0,0,.2);
 }
 
 .photo-container {
