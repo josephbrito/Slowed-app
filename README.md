@@ -6,6 +6,20 @@
 
 ## Send your song by youtube url or select a song file
 
+## Usage:
+
+#### Create a virtualenv and run below commands:
+
+```bash
+    source bin/activate
+    
+    git clone https://github.com/josephbrito/Slowed-app
+
+    pip install -r requirements.txt
+
+    python index.py
+```
+
 ### Techs:
 - Python3
 - Flask
