@@ -4,13 +4,11 @@ import subprocess
 import time
 import shutil
 
-import pyrubberband as prband
 from pydub import AudioSegment
 from AudioFusion import Fusion
 from pedalboard import Pedalboard
 from pedalboard import Reverb
 from pedalboard import Convolution
-from pedalboard import PitchShift
 
 def main(path):
     try:
@@ -53,42 +51,27 @@ def main(path):
             Reverb(room_size=0.30, wet_level=.40, dry_level=.40),
         ])
 
-        total_steps = 5  # number of steps
+        total_steps = 3  # number of steps
 
         print("Carregando...")
 
-        # Step 1: load the song file
+        # Step 1: Set effects pedalboard
         print_progress(1, total_steps)
-
-        audio, sample_rate = sf.read(song_path)
-        tempo_shift = prband.time_stretch(audio, sample_rate, 100/100.0)
-        sf.write(os.path.join(destination, song_name + slow_or_fast + ".wav"), tempo_shift, sample_rate, format="wav")
-
-        # Step 2: change pitch
-        print_progress(2, total_steps)
-
-        audio_2, sample_rate_2 = sf.read(song_path)
-        pitch_shift = prband.pitch_shift(audio_2, sample_rate_2, 100/100.0)
-        sf.write(os.path.join(destination, song_name + slow_or_fast + ".wav"), pitch_shift, sample_rate_2, format="wav")
-
-        # Step 3: Set effects pedalboard
-        print_progress(3, total_steps)
 
         audio_3, sample_rate_3 = sf.read(song_path)
         all_effects = reverb(audio_3, sample_rate_3)
         sf.write(song_path, all_effects, sample_rate_3)
 
-        # Step 4: File to .mp3
-        print_progress(4, total_steps)
+        # Step 2 File to .mp3
+        print_progress(2, total_steps)
 
         final_wav = AudioSegment.from_wav(song_path)
         final_wav.export(os.path.join(destination, song_name + slow_or_fast + ".mp3"), format="mp3")
 
-        # Step 5: Clear temp files
-        print_progress(5, total_steps)
+        # Step 3: Clear temp files
+        print_progress(3, total_steps)
 
         os.remove(song_path)
-        os.remove(os.path.join(destination, song_name + slow_or_fast + ".wav"))
         os.remove(os.path.join(path))
 
         print("\nConcluído!")

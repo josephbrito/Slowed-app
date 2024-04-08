@@ -212,6 +212,10 @@ body, html {
     animation: errorY 3s infinite ease-out;
     margin:30px;
   }
+
+  #btn-download {
+    color: #000;
+  }
   
   @keyframes escaleY {
     0%, 80%, 100% {
