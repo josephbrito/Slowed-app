@@ -120,6 +120,7 @@ body, html {
     transition: .3s ease-out;
     border:1px solid #fff;
     text-decoration: none;
+    color: #000;
 }
 
 #result {
@@ -211,10 +212,6 @@ body, html {
     right:0;
     animation: errorY 3s infinite ease-out;
     margin:30px;
-  }
-
-  #btn-download {
-    color: #000;
   }
   
   @keyframes escaleY {

@@ -1,4 +1,4 @@
-from pytube import YouTube
+from pytubefix import YouTube
 import os
 
 def LoadingDownload(stream, chunk, bytes):
@@ -9,7 +9,7 @@ def LoadingDownload(stream, chunk, bytes):
 
  
 def DownloadVideo(url):
-    yt = YouTube(url, on_progress_callback=LoadingDownload)
+    yt = YouTube(url, on_progress_callback=LoadingDownload, use_po_token=True)
 
     try:
         video = yt.streams.filter(only_audio=True).first()

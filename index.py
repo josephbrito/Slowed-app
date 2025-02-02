@@ -32,6 +32,7 @@ def loadUrl():
         if request.method == 'POST':
             url = request.form['yt_url']
             path_song_youtube = DownloadVideo(url)
+            print("path veio assim - ", path_song_youtube)
             if path_song_youtube:
                 song_path_slowed = main(path_song_youtube)
 
@@ -43,4 +44,4 @@ def loadUrl():
         abort(500)
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run(debug=True, port=5500)
