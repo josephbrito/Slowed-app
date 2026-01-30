@@ -9,7 +9,7 @@ def LoadingDownload(stream, chunk, bytes):
 
  
 def DownloadVideo(url):
-    yt = YouTube(url, on_progress_callback=LoadingDownload, use_po_token=True)
+    yt = YouTube(url, 'WEB', on_progress_callback=LoadingDownload, use_po_token=True)
 
     try:
         video = yt.streams.filter(only_audio=True).first()
